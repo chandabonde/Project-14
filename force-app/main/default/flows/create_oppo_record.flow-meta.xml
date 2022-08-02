@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <dynamicChoiceSets>
+        <name>StageName</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>StageName</picklistField>
+        <picklistObject>Opportunity</picklistObject>
+    </dynamicChoiceSets>
+    <interviewLabel>create oppo record {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>create oppo record</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <name>create_oppo</name>
+        <label>create oppo</label>
+        <locationX>610</locationX>
+        <locationY>385</locationY>
+        <inputAssignments>
+            <field>CloseDate</field>
+            <value>
+                <elementReference>date</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>Oppo_Name</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <elementReference>StageName</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordCreates>
+    <screens>
+        <name>Scr_1</name>
+        <label>Scr 1</label>
+        <locationX>299</locationX>
+        <locationY>259</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>scr_2</targetReference>
+        </connector>
+        <fields>
+            <name>Oppo_Name</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <stringValue>aaa</stringValue>
+            </defaultValue>
+            <fieldText>Oppo Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>date</name>
+            <dataType>Date</dataType>
+            <fieldText>date</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <helpText>&lt;p&gt;This is for demo purpose.{!$Flow.FaultMessage}&lt;/p&gt;</helpText>
+        <pausedText>&lt;p&gt;this is for testing purpose2.&lt;/p&gt;</pausedText>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>scr_2</name>
+        <label>scr 2</label>
+        <locationX>450</locationX>
+        <locationY>326</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>create_oppo</targetReference>
+        </connector>
+        <fields>
+            <name>stage</name>
+            <choiceReferences>StageName</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>stage</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Scr_1</startElementReference>
+    <status>Draft</status>
+</Flow>
